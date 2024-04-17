@@ -12,8 +12,14 @@ export default class LembreteEntrada extends Component {
     }
 
     Adicionar = () => {
-        this.props.onAdicionar(this.state.lembrete);
-        this.state.lembrete = ''
+        if (this.state.lembrete !== null && this.state.lembrete !== '') {
+            this.props.onAdicionar(this.state.lembrete);
+            this.setState({ lembrete: '' });
+        }
+        else {
+            alert(`Preencha o campo textual com um lembrete!`);
+        }
+
     }
 
     render() {
@@ -21,7 +27,8 @@ export default class LembreteEntrada extends Component {
             <div>
                 <InputText
                     className={`${this.props.classNameInputText} w-full mb-2`}
-                    placeholder='Digite seu novo lembrete'
+                    placeholder='Digite um novo lembrete'
+                    style={{ textAlign: 'center' }}
                     value={this.state.lembrete}
                     onChange={this.LembretePreenchido}
                 />
